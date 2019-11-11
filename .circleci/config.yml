@@ -1,13 +1,24 @@
-version: 2
-jobs:
-  build:
-    # only build the circleci branch for now
-    branches:
-      only:
-        - master
+version: 2.1
+orbs:
+  slack: circleci/slack@3.3.0
+executors:
+  my-executor:
     docker:
-      # specify the version
       - image: circleci/golang:1.13.4
+
+jobs:
+  start-workflow:
+    executor: my-executor
+  steps:
+    - run:
+        name: Workflow Start job
+        command: |
+          echo "Workflow Start!"
+          echo ${CIRCLE_BUILD_URL}
+          echo ${CIRCLE_COMPARE_URL}
+          echo ${CIRCLE_JOB}
+  test-iac:
+    executor: my-executor
     working_directory: /go/src/terratest/
     steps:
       - checkout
@@ -17,3 +28,18 @@ jobs:
       - run: cd test; dep init
       #- run: go get k8s.io/client-go@master
       - run: cd test; go test -v -run TestTerraformAwsNetworkExample
+
+workflow:
+  iac-pipeline:
+    jobs:
+      - start-workflow:
+          name: start-workflow
+          filter:
+            branches:
+              only:
+                - master
+      - test-iac:
+          name: test-iac-code
+          requires:
+            - start-workflow
+
