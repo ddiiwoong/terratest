@@ -1,4 +1,4 @@
-# 12차
+# 2019.11.11 Ver.14
 version: 2.1
 orbs:
   slack: circleci/slack@3.3.0
@@ -8,7 +8,7 @@ executors:
       - image: circleci/golang:1.13.4
   terraform-executor:
     docker:
-      - image: hashicorp/terraform:0.11.14 
+      - image: hashicorp/terraform:0.11.14
   ibm-terraform:
     docker:
       - image: ibmterraform/terraform-provider-ibm-docker:v0.18.0
