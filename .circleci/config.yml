@@ -57,6 +57,7 @@ jobs:
       - run:
           command: |
             cd ~/project/ibm
+            mkdir -p ~/project/ibm/ansible/
             apk add ansible
             terraform init -input=false
             terraform apply -auto-approve
