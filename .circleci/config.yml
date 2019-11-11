@@ -9,14 +9,14 @@ executors:
 jobs:
   start-workflow:
     executor: my-executor
-  steps:
-    - run:
-        name: Workflow Start job
-        command: |
-          echo "Workflow Start!"
-          echo ${CIRCLE_BUILD_URL}
-          echo ${CIRCLE_COMPARE_URL}
-          echo ${CIRCLE_JOB}
+    steps:
+      - run: |
+          name: Workflow Start job
+          command: |
+            echo "Workflow Start!"
+            echo ${CIRCLE_BUILD_URL}
+            echo ${CIRCLE_COMPARE_URL}
+            echo ${CIRCLE_JOB}
   test-iac:
     executor: my-executor
     working_directory: /go/src/terratest/
