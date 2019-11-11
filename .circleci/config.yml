@@ -58,8 +58,9 @@ jobs:
           command: |
             cd ~/project/ibm
             mkdir -p ~/project/ibm/ansible/
-            apk add python python-dev py-pip libffi-dev openssl-dev
+            apk add python python-dev py-pip libffi-dev openssl-dev openssh-client
             pip install ansible -U
+            pip install netaddr
             terraform init -input=false
             terraform apply -auto-approve
   gcp-apply:
