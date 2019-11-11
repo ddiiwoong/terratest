@@ -36,30 +36,30 @@ jobs:
       #- run: cd test; dep init
       #- run: go get k8s.io/client-go@master
       #- run: cd test; go test -v -run TestTerraformAwsNetworkExample
-  aws-apply:
-    executor: terraform-executor
-    working_directory: ~/project
-    steps:
-      - checkout
-      - run:
-          command: |
-            cd ~/project/aws
-            terraform init -input=false
-            terraform apply -auto-approve
-  ibm-apply:
-    executor: ibm-terraform
-    working_directory: ~/project
-    steps:
-      - checkout
-      - run:
-          command: |
-            cd ~/project/ibm
-            mkdir -p ~/project/ibm/ansible/
-            apk add python python-dev py-pip libffi-dev openssl-dev openssh-client
-            pip install ansible -U
-            pip install netaddr
-            terraform init -input=false
-            terraform apply -auto-approve
+  # aws-apply:
+  #   executor: terraform-executor
+  #   working_directory: ~/project
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         command: |
+  #           cd ~/project/aws
+  #           terraform init -input=false
+  #           terraform apply -auto-approve
+  # ibm-apply:
+  #   executor: ibm-terraform
+  #   working_directory: ~/project
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         command: |
+  #           cd ~/project/ibm
+  #           mkdir -p ~/project/ibm/ansible/
+  #           apk add python python-dev py-pip libffi-dev openssl-dev openssh-client
+  #           pip install ansible -U
+  #           pip install netaddr
+  #           terraform init -input=false
+  #           terraform apply -auto-approve
   gcp-apply:
     executor: terraform-executor
     working_directory: ~/project
@@ -92,12 +92,12 @@ workflows:
           type: approval
           requires:
             - slack/approval-notification
-      - aws-apply:
-          requires:
-            - hold
-      - ibm-apply:
-          requires:
-            - hold
+      # - aws-apply:
+      #     requires:
+      #       - hold
+      # - ibm-apply:
+      #     requires:
+      #       - hold
       - gcp-apply:
           requires:
             - hold
