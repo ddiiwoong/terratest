@@ -56,17 +56,17 @@ workflows:
           name: test-iac-code
           requires:
             - start-workflow
-      # - slack/approval-notification:
-      #     message: TF Apply Pending approval
-      #     color: '#42e2f4'
-      #     mentions: 'UEXB11CMR'
-      #     webhook: '${SLACK_WEBHOOK}'
-      #     requires:
-      #       - test-iac
+      - slack/approval-notification:
+          message: TF Apply Pending approval
+          color: '#42e2f4'
+          mentions: 'UEXB11CMR'
+          webhook: '${SLACK_WEBHOOK}'
+          requires:
+            - test-iac-code
       - hold:
           type: approval
           requires:
-            - test-iac-code
+            - slack/approval-notification
       - apply:
           requires:
             - hold
