@@ -1,10 +1,10 @@
 resource "google_storage_bucket" "terraform_state" {
-  name     = "sktcl-terraform-demo-state"
+  name     = "sktcl-terraform-demo-state-kubeflow"
   location = "asia-northeast1"
 }
 
 resource "google_container_cluster" "practice" {
-  name               = "kubeflow"
+  name               = "kubeflow2"
   zone               = "${data.google_compute_zones.available.names[0]}"
   initial_node_count = 2
 
