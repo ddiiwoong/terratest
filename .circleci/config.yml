@@ -59,6 +59,16 @@ jobs:
             cd ~/project/examples/terraform-aws-network-example
             #terraform init -input=false
             #terraform apply -auto-approve
+  gcp-apply:
+    executor: terraform-executor
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd ~/project/gcp
+            terraform init -input=false
+            terraform apply -auto-approve
 
 workflows:
   iac-pipeline:
@@ -86,7 +96,7 @@ workflows:
       - ibm-apply:
           requires:
             - hold
-      # - gcp-apply:
-      #     requires:
-      #       - hold
+      - gcp-apply:
+          requires:
+            - hold
 
