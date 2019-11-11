@@ -35,7 +35,7 @@ jobs:
       - run: cd test; go test -v -run TestTerraformAwsNetworkExample
   apply:
     executor: terraform-executor
-    working_directory: /go/src/terratest/
+    working_directory: ~/project
     steps:
       - checkout
       - run:

@@ -13,14 +13,17 @@
 
 variable "main_vpc_cidr" {
   description = "The CIDR of the main VPC"
+  default     = "10.10.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "The CIDR of public subnet"
+  default     = "10.10.2.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "The CIDR of the private subnet"
+  default     = "10.10.1.0/24"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
