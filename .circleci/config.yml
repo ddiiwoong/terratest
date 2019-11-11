@@ -43,12 +43,9 @@ jobs:
       - checkout
       - run:
           command: |
-            cd ~/project/examples/terraform-aws-network-example
+            cd ~/project/aws
             terraform init -input=false
-            terraform validate
-            terraform plan -input=false -out=terraform.plan
             terraform apply -auto-approve
-            terraform destroy -auto-approve
   ibm-apply:
     executor: ibm-terraform
     working_directory: ~/project
