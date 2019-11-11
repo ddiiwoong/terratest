@@ -40,12 +40,12 @@ jobs:
       - checkout
       - run:
           command: |
-            cd example/terraform-aws-network-example
+            cd ~/project/example/terraform-aws-network-example
             terraform init -input=false
             terraform validate
             terraform plan -input=false -out=terraform.plan
             terraform apply -auto-approve
-            terraform destory -auto-approve
+            terraform destroy -auto-approve
 
 workflows:
   iac-pipeline:
