@@ -8,7 +8,10 @@ executors:
       - image: circleci/golang:1.13.4
   terraform-executor:
     docker:
-      - image: hashicorp/terraform:0.11.14  
+      - image: hashicorp/terraform:0.11.14 
+  ibm-terraform:
+    docker:
+      - image: ibmterraform/terraform-provider-ibm-docker:v0.18.0
 
 jobs:
   start-workflow:
@@ -33,7 +36,7 @@ jobs:
       - run: cd test; dep init
       #- run: go get k8s.io/client-go@master
       - run: cd test; go test -v -run TestTerraformAwsNetworkExample
-  apply:
+  aws-apply:
     executor: terraform-executor
     working_directory: ~/project
     steps:
@@ -46,6 +49,16 @@ jobs:
             terraform plan -input=false -out=terraform.plan
             terraform apply -auto-approve
             terraform destroy -auto-approve
+  ibm-apply:
+    executor: ibm-executor
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd ~/project/examples/terraform-aws-network-example
+            #terraform init -input=false
+            #terraform apply -auto-approve
 
 workflows:
   iac-pipeline:
@@ -67,7 +80,13 @@ workflows:
           type: approval
           requires:
             - slack/approval-notification
-      - apply:
+      - aws-apply:
           requires:
             - hold
+      - ibm-apply:
+          requires:
+            - hold
+      # - gcp-apply:
+      #     requires:
+      #       - hold
 
