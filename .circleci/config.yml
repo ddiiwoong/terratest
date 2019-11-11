@@ -56,7 +56,8 @@ jobs:
       - checkout
       - run:
           command: |
-            cd ~/project/examples/terraform-aws-network-example
+            cd ~/project/ibm
+            apk add ansible
             terraform init -input=false
             terraform apply -auto-approve
   gcp-apply:
