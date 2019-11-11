@@ -34,7 +34,6 @@ jobs:
       - run: curl -L -s https://releases.hashicorp.com/packer/1.2.3/packer_1.2.3_linux_amd64.zip -o /go/bin/packer.zip && unzip /go/bin/packer.zip -d /go/bin && chmod +x /go/bin/packer
       - run: curl -L -s https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip -o /go/bin/terraform.zip && unzip /go/bin/terraform.zip -d /go/bin && chmod +x /go/bin/terraform
       - run: cd test; dep init
-      - run: go get k8s.io/client-go@master
       - run: cd test; go test -v -run TestTerraformAwsNetworkExample
   aws-apply:
     executor: terraform-executor
