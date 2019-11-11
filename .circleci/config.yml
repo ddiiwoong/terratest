@@ -40,7 +40,7 @@ jobs:
       - checkout
       - run:
           command: |
-            cd ~/project/example/terraform-aws-network-example
+            cd ~/project/examples/terraform-aws-network-example
             terraform init -input=false
             terraform validate
             terraform plan -input=false -out=terraform.plan
