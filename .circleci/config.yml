@@ -34,7 +34,7 @@ jobs:
       #- run: go get k8s.io/client-go@master
       - run: cd test; go test -v -run TestTerraformAwsNetworkExample
   apply:
-    executor: my-executor
+    executor: terraform-executor
     working_directory: /go/src/terratest/
     steps:
       - checkout
