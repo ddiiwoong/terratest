@@ -29,7 +29,7 @@ jobs:
       #- run: go get k8s.io/client-go@master
       - run: cd test; go test -v -run TestTerraformAwsNetworkExample
 
-workflow:
+workflows:
   iac-pipeline:
     jobs:
       - start-workflow:
