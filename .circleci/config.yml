@@ -57,8 +57,8 @@ jobs:
       - run:
           command: |
             cd ~/project/examples/terraform-aws-network-example
-            #terraform init -input=false
-            #terraform apply -auto-approve
+            terraform init -input=false
+            terraform apply -auto-approve
   gcp-apply:
     executor: terraform-executor
     working_directory: ~/project
