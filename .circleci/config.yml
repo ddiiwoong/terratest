@@ -58,7 +58,8 @@ jobs:
           command: |
             cd ~/project/ibm
             mkdir -p ~/project/ibm/ansible/
-            apk add ansible
+            apk add python python-dev py-pip libffi-dev openssl-dev
+            pip install ansible -U
             terraform init -input=false
             terraform apply -auto-approve
   gcp-apply:
