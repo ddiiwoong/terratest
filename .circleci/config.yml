@@ -34,10 +34,6 @@ workflows:
     jobs:
       - start-workflow:
           name: start-workflow
-          filter:
-            branches:
-              only:
-                - master
       - test-iac:
           name: test-iac-code
           requires:
